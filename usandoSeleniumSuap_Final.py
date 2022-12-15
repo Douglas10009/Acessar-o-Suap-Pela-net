@@ -10,6 +10,18 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from datetime import datetime
 
+# Erro ao rodar pelo Codespaces ou qualquer outra maneira online, porque não tem o ChromeDrivers
+# Tentativa de criar um chrome Driver, caso tente rodar no seu pc, tire o código a partir dessa linha até ...
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+options.binary_location = "C:\\Program Files\\Chrome\\chrome64_55.0.2883.75\\chrome.exe"
+driver = webdriver.Chrome(chrome_options=options,
+                          executable_path=r'C:\path\to\chromedriver.exe')
+driver.get('http://google.com/')
+print("Chrome Browser Invoked")
+
+# Até essa linha aqui
 
 # Cria um documento para armazenar arquivos
 today = datetime.now().strftime("%d-%m-%Y_%H,%M,%S") + ".txt"
@@ -26,7 +38,7 @@ nav.get('https://suap.ifba.edu.br/')
 # Entra com a senha e login
 login = ""  # INSIRA SEU LOGIN
 nav.find_element(By.NAME, "username").send_keys(login)
-senha = "ifba."  # INSIRA SUA SENHA
+senha = ""  # INSIRA SUA SENHA
 nav.find_element(By.NAME, "password").send_keys(senha)
 nav.find_element(By.XPATH, '//*[@id="login"]/form/div[3]/input').click()
 
